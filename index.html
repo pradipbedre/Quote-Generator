@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random quote generator</title>
+    <style>
+      .container {
+        height: 20vh;
+        width: 60vw;
+
+        margin: auto;
+        text-align: center;
+        position: relative;
+        top: 35vh;
+      }
+      #quote {
+        font-size: 24px;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+        text-align: center;
+        margin-top: 40px;
+      }
+      #author {
+        text-align: end;
+        padding-left: 10px;
+        font-style: italic;
+        font-size: 20px;
+        position: relative;
+        right: 20px;
+        top: 20px;
+      }
+      .btn {
+        position: relative;
+        top: 20px;
+      }
+      .btn button {
+        padding: 7px;
+        font-size: 12px;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="main">
+        <p id="quote">Think and grow rich</p>
+        <p id="author">nepolin hill</p>
+      </div>
+      <div class="btn">
+        <button id="myBtn">NEW QUOTE</button>
+      </div>
+    </div>
+    <script>
+      var quote = document.getElementById("quote");
+      var author = document.getElementById("author");
+      const myBtn = document.getElementById("myBtn");
+
+      /* Using async await */
+
+      myBtn.addEventListener("click", async () => {
+        const res = await fetch("https://type.fit/api/quotes");
+        const data = await res.json();
+        let randomNo = Math.floor(Math.random() * 1643);
+        quote.innerHTML = `" ${data[randomNo].text}"`;
+        author.innerHTML = `- ${data[randomNo].author}`;
+        console.log(data);
+      });
+
+      /* Using Promises */
+
+      /* myBtn.addEventListener("click", () => {
+        fetch("https://type.fit/api/quotes")
+          .then((res) => {
+            console.log(res);
+            return res.json();
+          })
+          .then((data) => {
+            console.log(data);
+            let randomNo = Math.floor(Math.random() * 1643);
+            quote.innerHTML = `" ${data[randomNo].text}"`;
+            author.innerHTML = data[randomNo].author;
+          });
+      }); */
+    </script>
+  </body>
+</html>
