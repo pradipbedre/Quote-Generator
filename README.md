@@ -1,2 +1,1 @@
-# Quote-Generator
-Generate Random motivational quotes
+# pradip-quote-genrator.netlify.app
